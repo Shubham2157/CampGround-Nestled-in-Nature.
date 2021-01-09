@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const mongoose = require("mongoose")
 
 // connecting to the db with mongoose
-mongoose.connect("mongodb://localhost/yelp_camp")
+mongoose.connect("mongodb://localhost/yelp_camp" , { useNewUrlParser: true },  { useUnifiedTopology: true } )
 
 // Schema Setup
 const campgroundSchema = new mongoose.Schema({
