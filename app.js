@@ -52,7 +52,14 @@ app.get("/", (req, res) => {
 
 //
 app.get("/campgrounds", (req, res) => {
-    res.render("campgrounds", { campgrounds: campgrounds })
+    //Get all Campgrounds From DB
+    Campground.find({}, (err,allCampgrounds) =>{
+        if(err){
+            console.log(err);
+        } else{
+            res.render("campgrounds", { campgrounds: allCampgrounds })
+        }
+    })
 })
 
 app.post("/campgrounds", (req, res) => {
