@@ -88,9 +88,16 @@ app.get("/campgrounds/new", (req, res) => {
 //show all info in one page about one campground
 app.get("/campgrounds/:id", (req,res) =>{
     //find campground with provided ID
-    //render show template with that campground
+    Campground.findById(req.params.id, (err, foundCampground) =>{
+        if(err){
+            console.log(err);
+        } else{
+            //render show template with that campground
+            res.render("show", {campground: foundCampground})
+        }
+    })
+
     // res.send("This Will Be the show page one day!")
-    res.render("show")
 })
 
 // declaring Port no
