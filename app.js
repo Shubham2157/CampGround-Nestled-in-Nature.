@@ -14,6 +14,19 @@ const campgroundSchema = new mongoose.Schema({
 
 var Campground = mongoose.model("Campground", campgroundSchema)
 
+
+Campground.create({
+    name: "Shubham Jha",
+    image: "https://pixabay.com/get/52e8d4444255ae14f1dc84609620367d1c3ed9e04e507748752e7ed1974bc2_340.jpg"
+}, (err, campground) => {
+    if(err){
+        console.log(err)
+    }else{
+        console.log("NEWLY CREATED CAMPGROUND: ")
+        console.log(campground)
+    }
+})
+
 app.use(bodyParser.urlencoded({ extended: true }));
 // setting view engine to ejs
 app.set("view engine", "ejs")
