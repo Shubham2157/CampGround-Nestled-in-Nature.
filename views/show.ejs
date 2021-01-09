@@ -1,3 +1,13 @@
-<h1>This is the show tamplate!</h1>
+<%- include('partials/header'); -%>
 
-<p><%= campground.name %></p>
+    <h1>
+        <%= campground.name %>
+    </h1>
+
+    <img src="<%= campground.image %>" alt="error">
+
+    <p>
+        <%= campground.description %>
+    </p>
+
+    <%- include('partials/footer'); -%>
