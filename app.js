@@ -68,7 +68,8 @@ app.post("/campgrounds", (req, res) => {
     // get data from user and add to campground array
     var name = req.body.name
     var image = req.body.image
-    var newCampground = { name: name, image: image }
+    var desc = req.body.description
+    var newCampground = { name: name, image: image, description: desc }
     // campgrounds.push(newCampground)
 
     Campground.create(newCampground, (err, newlyCreated) => {
