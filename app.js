@@ -16,18 +16,18 @@ const campgroundSchema = new mongoose.Schema({
 var Campground = mongoose.model("Campground", campgroundSchema)
 
 
-Campground.create({
-    name: "Shubham Jha",
-    image: "https://pixabay.com/get/52e8d4444255ae14f1dc84609620367d1c3ed9e04e507748752e7ed1974bc2_340.jpg",
-    description: "This is a huge granite hill, no bathrooms. No water. Beautiful granite!"
-}, (err, campground) => {
-    if(err){
-        console.log(err)
-    }else{
-        console.log("NEWLY CREATED CAMPGROUND: ")
-        console.log(campground)
-    }
-})
+// Campground.create({
+//     name: "Shubham Jha",
+//     image: "https://pixabay.com/get/52e8d4444255ae14f1dc84609620367d1c3ed9e04e507748752e7ed1974bc2_340.jpg",
+//     description: "This is a huge granite hill, no bathrooms. No water. Beautiful granite!"
+// }, (err, campground) => {
+//     if(err){
+//         console.log(err)
+//     }else{
+//         console.log("NEWLY CREATED CAMPGROUND: ")
+//         console.log(campground)
+//     }
+// })
 
 app.use(bodyParser.urlencoded({ extended: true }));
 // setting view engine to ejs
@@ -59,7 +59,7 @@ app.get("/campgrounds", (req, res) => {
         if(err){
             console.log(err);
         } else{
-            res.render("campgrounds", { campgrounds: allCampgrounds })
+            res.render("index", { campgrounds: allCampgrounds })
         }
     })
 })
@@ -85,12 +85,12 @@ app.get("/campgrounds/new", (req, res) => {
     res.render("new")
 })
 
-//show all info in one page
-
+//show all info in one page about one campground
 app.get("/campgrounds/:id", (req,res) =>{
     //find campground with provided ID
     //render show template with that campground
-    res.send("This Will Be the show page one day!")
+    // res.send("This Will Be the show page one day!")
+    res.render("show")
 })
 
 // declaring Port no
