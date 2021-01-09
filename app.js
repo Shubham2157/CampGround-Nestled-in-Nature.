@@ -1,6 +1,18 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const mongoose = require("mongoose")
+
+// connecting to the db with mongoose
+mongoose.connect("mongodb://localhost/yelp_camp")
+
+// Schema Setup
+const campgroundSchema = new mongoose.Schema({
+    name: String,
+    image: String
+})
+
+var Campground = mongoose.model("Campground", campgroundSchema)
 
 app.use(bodyParser.urlencoded({ extended: true }));
 // setting view engine to ejs
