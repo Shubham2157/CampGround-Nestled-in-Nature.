@@ -91,6 +91,15 @@ app.get("/campgrounds/:id", (req,res) =>{
 //====================
 
 app.get("/campgrounds/:id/comments/new", (req,res)=>{
+    
+    //find campground by id
+    Campground.findById(req.params.id, (err, campground)=>{
+        if(err){
+            console.log(err);
+        } else{
+            res.render("comments/new", {campground: campground})
+        }
+    })
     // res.send("This will be comment form")
     res.render("comments/new");
 })
