@@ -5,8 +5,6 @@ const mongoose      = require("mongoose")
 const Campground    = require('./models/campground')
 const seedDB        = require("./seeds")
 
-seedDB()
-
 // connecting to the db with mongoose
 mongoose.connect("mongodb://localhost/yelp_camp" , { useNewUrlParser: true },  { useUnifiedTopology: true } )
 
@@ -27,6 +25,8 @@ mongoose.connect("mongodb://localhost/yelp_camp" , { useNewUrlParser: true },  {
 app.use(bodyParser.urlencoded({ extended: true }));
 // setting view engine to ejs
 app.set("view engine", "ejs")
+
+seedDB()
 
 
 // Home Page Route
@@ -83,6 +83,15 @@ app.get("/campgrounds/:id", (req,res) =>{
     })
 
     // res.send("This Will Be the show page one day!")
+})
+
+
+//====================
+// Comments Routes
+//====================
+
+app.get("/campgrounds/:id/comments/new", (req,res)=>{
+    res.send("This will be comment form")
 })
 
 // declaring Port no
