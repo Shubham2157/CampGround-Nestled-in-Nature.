@@ -177,6 +177,10 @@ app.get("/login", (req,res)=>{
     res.render("login")
 })
 
+//handelling login post
+app.post("/login", (req,res)=>{
+    res.send("longin sucess...")
+})
 
 // declaring Port no
 const port = 3000;
