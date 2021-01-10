@@ -147,6 +147,15 @@ app.post("/campgrounds/:id/comments", (req,res)=>{
     })
 })
 
+//============
+// Auth Route
+//============
+
+// show register form
+app.get("/register", (req,res)=>{
+    res.render("register");
+})
+
 
 // declaring Port no
 const port = 3000;
