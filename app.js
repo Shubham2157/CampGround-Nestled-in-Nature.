@@ -178,8 +178,12 @@ app.get("/login", (req,res)=>{
 })
 
 //handelling login post
-app.post("/login", (req,res)=>{
-    res.send("longin sucess...")
+// url , middleware , callback
+app.post("/login", passport.authenticate("local", {
+    successRedirect: "/campgrounds",
+    failureRedirect: "/login"
+}) ,(req,res)=>{
+    // res.send("longin sucess...")
 })
 
 // declaring Port no
