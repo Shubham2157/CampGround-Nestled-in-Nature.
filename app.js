@@ -156,6 +156,11 @@ app.get("/register", (req,res)=>{
     res.render("register");
 })
 
+//hendle sign Up logic
+app.post("/register", (req,res){
+    res.send("Signing up.....")
+})
+
 
 // declaring Port no
 const port = 3000;
