@@ -3,6 +3,9 @@ const app           = express()
 const bodyParser    = require('body-parser')
 const mongoose      = require("mongoose")
 const Campground    = require('./models/campground')
+const seedDB        = require("./seeds")
+
+seedDB()
 
 // connecting to the db with mongoose
 mongoose.connect("mongodb://localhost/yelp_camp" , { useNewUrlParser: true },  { useUnifiedTopology: true } )
