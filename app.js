@@ -111,21 +111,21 @@ app.post("/campgrounds/:id/comments", (req,res)=>{
             console.log(err);
             res.redirect("/campground")
         } else{
+            //create new comment
             Comment.create(req.body.comment, (err, comment)=>{
                 if(err){
                     console.log(err)
                 } else{
+                     //connect new comment to campground
                     campground.comments.push(comment)
                     campground.save();
+                    //redirect campground show page
                     res.redirect("/campgrounds/" + campground._id)
                 }
             });
             // comment will be created
         }
     })
-    //create new comment
-    //connect new comment to campground
-    //redirect campground show page
 })
 
 
