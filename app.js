@@ -1,19 +1,11 @@
-const express = require('express')
-const app = express()
-const bodyParser = require('body-parser')
-const mongoose = require("mongoose")
+const express       = require('express')
+const app           = express()
+const bodyParser    = require('body-parser')
+const mongoose      = require("mongoose")
+const Campground    = require('./models/campground')
 
 // connecting to the db with mongoose
 mongoose.connect("mongodb://localhost/yelp_camp" , { useNewUrlParser: true },  { useUnifiedTopology: true } )
-
-// Schema Setup
-const campgroundSchema = new mongoose.Schema({
-    name: String,
-    image: String,
-    description: String
-})
-
-var Campground = mongoose.model("Campground", campgroundSchema)
 
 
 // Campground.create({
