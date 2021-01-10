@@ -186,6 +186,13 @@ app.post("/login", passport.authenticate("local", {
     // res.send("longin sucess...")
 })
 
+//log out route
+
+app.get("/logout", (req,res) => {
+    req.logOut();
+    res.redirect("/campgrounds")
+})
+
 // declaring Port no
 const port = 3000;
 
