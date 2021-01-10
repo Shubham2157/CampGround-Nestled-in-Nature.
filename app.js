@@ -26,6 +26,7 @@ mongoose.connect("mongodb://localhost/yelp_camp" , { useNewUrlParser: true },  {
 app.use(bodyParser.urlencoded({ extended: true }));
 // setting view engine to ejs
 app.set("view engine", "ejs")
+app.use(express.static(__dirname + "/public"))
 
 seedDB()
 
