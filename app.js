@@ -171,6 +171,12 @@ app.post("/register", (req,res)=>{
     })
 })
 
+// show login form
+
+app.get("/login", (req,res)=>{
+    res.render("/login")
+})
+
 
 // declaring Port no
 const port = 3000;
