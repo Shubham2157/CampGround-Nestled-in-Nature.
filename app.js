@@ -157,7 +157,7 @@ app.get("/register", (req,res)=>{
 })
 
 //hendle sign Up logic
-app.post("/register", (req,res){
+app.post("/register", (req,res)=>{
     res.send("Signing up.....")
 })
 
