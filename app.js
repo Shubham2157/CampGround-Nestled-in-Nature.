@@ -1,10 +1,13 @@
-const express       = require('express')
-const app           = express()
-const bodyParser    = require('body-parser')
-const mongoose      = require("mongoose")
-const Campground    = require('./models/campground')
-const Comment       = require("./models/comment")
-const seedDB        = require("./seeds")
+const express       = require('express'),
+      app           = express(),
+      bodyParser    = require('body-parser'),
+      mongoose      = require("mongoose"),
+      passport      = require('passport'),
+      LocalStrategy = require('passport-local'),
+      user          = require('./models/user'),
+      Campground    = require('./models/campground'),
+      Comment       = require("./models/comment"),
+      seedDB        = require("./seeds")
 
 // connecting to the db with mongoose
 mongoose.connect("mongodb://localhost/yelp_camp" , { useNewUrlParser: true },  { useUnifiedTopology: true } )
