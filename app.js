@@ -3,6 +3,7 @@ const app           = express()
 const bodyParser    = require('body-parser')
 const mongoose      = require("mongoose")
 const Campground    = require('./models/campground')
+const Comment       = require("./models/comment")
 const seedDB        = require("./seeds")
 
 // connecting to the db with mongoose
@@ -102,6 +103,31 @@ app.get("/campgrounds/:id/comments/new", (req,res)=>{
         }
     })
 })
+
+app.post("/campgrounds/:id/comments", (req,res)=>{
+    //lookup campground using id
+    Campground.findById(req.params.id, (err, campground)=>{
+        if(err){
+            console.log(err);
+            res.redirect("/campground")
+        } else{
+            Comment.create(req.body.comment, (err, comment)=>{
+                if(err){
+                    console.log(err)
+                } else{
+                    campground.comments.push(comment)
+                    campground.save();
+                    res.redirect("/campgrounds/" + campground._id)
+                }
+            });
+            // comment will be created
+        }
+    })
+    //create new comment
+    //connect new comment to campground
+    //redirect campground show page
+})
+
 
 // declaring Port no
 const port = 3000;
