@@ -41,7 +41,7 @@ app.get("/campgrounds", (req, res) => {
         if(err){
             console.log(err);
         } else{
-            res.render("index", { campgrounds: allCampgrounds })
+            res.render("campgrounds/index", { campgrounds: allCampgrounds })
         }
     })
 })
@@ -65,7 +65,7 @@ app.post("/campgrounds", (req, res) => {
 })
 
 app.get("/campgrounds/new", (req, res) => {
-    res.render("new")
+    res.render("campgrounds/new")
 })
 
 //show all info in one page about one campground
@@ -78,7 +78,7 @@ app.get("/campgrounds/:id", (req,res) =>{
             console.log(foundCampground);
             
             //render show template with that campground
-            res.render("show", {campground: foundCampground})
+            res.render("campgrounds/show", {campground: foundCampground})
         }
     })
 
@@ -91,7 +91,8 @@ app.get("/campgrounds/:id", (req,res) =>{
 //====================
 
 app.get("/campgrounds/:id/comments/new", (req,res)=>{
-    res.send("This will be comment form")
+    // res.send("This will be comment form")
+    res.render("comments/new");
 })
 
 // declaring Port no
