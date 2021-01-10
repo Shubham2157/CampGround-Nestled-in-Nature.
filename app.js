@@ -97,11 +97,10 @@ app.get("/campgrounds/:id/comments/new", (req,res)=>{
         if(err){
             console.log(err);
         } else{
+            // res.send("This will be comment form")
             res.render("comments/new", {campground: campground})
         }
     })
-    // res.send("This will be comment form")
-    res.render("comments/new");
 })
 
 // declaring Port no
