@@ -49,7 +49,7 @@ function seedDB() {
                             if(err){
                                 console.log(err);
                             } else{
-                                Campground.comment.push(comment)
+                                Campground.Comment.push(comment)
                                 Campground.save()
                                 console.log("Created new comment");
                             }
