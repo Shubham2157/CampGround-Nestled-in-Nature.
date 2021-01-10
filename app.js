@@ -158,7 +158,17 @@ app.get("/register", (req,res)=>{
 
 //hendle sign Up logic
 app.post("/register", (req,res)=>{
-    res.send("Signing up.....")
+    // res.send("Signing up.....")
+    var newUser = new User({username: req.body.username});
+    User.register(newUser, req.body.password, (err, user) => {
+        if(err){
+            console.log(err);
+            return res.render("register")
+        }
+        passport.authenticate("local")(req,res, ()=> {
+            res.redirect("/campgrounds")
+        })
+    })
 })
 
 
