@@ -20,7 +20,7 @@ router.get("/new", isLoggedIn ,(req,res)=>{
     })
 })
 
-router.post("/comments", isLoggedIn , (req,res)=>{
+router.post("/", isLoggedIn , (req,res)=>{
     //lookup campground using id
     Campground.findById(req.params.id, (err, campground)=>{
         if(err){
