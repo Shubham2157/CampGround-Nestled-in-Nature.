@@ -1,5 +1,5 @@
 var express     = require('express');
-var router      = express.Router();
+var router      = express.Router({mergeParams: true}); //merge parameter true for  finding th id from the home route
 var Campground  = require("../models/campground");
 var Comment     = require("../models/comment");
 
@@ -7,7 +7,7 @@ var Comment     = require("../models/comment");
 // Comments Routes
 //====================
 
-router.get("/campgrounds/:id/comments/new", isLoggedIn ,(req,res)=>{
+router.get("/new", isLoggedIn ,(req,res)=>{
     
     //find campground by id
     Campground.findById(req.params.id, (err, campground)=>{
@@ -20,7 +20,7 @@ router.get("/campgrounds/:id/comments/new", isLoggedIn ,(req,res)=>{
     })
 })
 
-router.post("/campgrounds/:id/comments", isLoggedIn , (req,res)=>{
+router.post("/comments", isLoggedIn , (req,res)=>{
     //lookup campground using id
     Campground.findById(req.params.id, (err, campground)=>{
         if(err){
