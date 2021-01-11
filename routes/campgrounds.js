@@ -21,7 +21,7 @@ router.post("/", isLoggedIn ,(req, res) => {
     var desc = req.body.description
     var author = {
         id: req.user._id,
-        username: req.body.username
+        username: req.user.username
     }
     var newCampground = { name: name, image: image, description: desc, author: author }
     // console.log(req.user);
