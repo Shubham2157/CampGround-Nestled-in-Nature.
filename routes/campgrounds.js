@@ -20,6 +20,7 @@ router.post("/", isLoggedIn ,(req, res) => {
     var image = req.body.image
     var desc = req.body.description
     var newCampground = { name: name, image: image, description: desc }
+    console.log(req.user);
     // campgrounds.push(newCampground)
 
     Campground.create(newCampground, (err, newlyCreated) => {
