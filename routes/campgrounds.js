@@ -78,7 +78,7 @@ router.put("/:id", (req,res) =>{
         if(err){
             res.redirect("/campgrounds")
         } else {
-            res.redirect("/campgrounds" + req.params.id);
+            res.redirect("/campgrounds/" + req.params.id);
         }
     })
 })
