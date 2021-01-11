@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
     })
 })
 //post campground
-router.post("/", (req, res) => {
+router.post("/", isLoggedIn ,(req, res) => {
     // get data from user and add to campground array
     var name = req.body.name
     var image = req.body.image
@@ -32,7 +32,7 @@ router.post("/", (req, res) => {
     }) 
 })
 //show campground form
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn ,(req, res) => {
     res.render("campgrounds/new")
 })
 
@@ -52,6 +52,14 @@ router.get("/:id", (req,res) =>{
 
     // res.send("This Will Be the show page one day!")
 })
+
+//middleware
+function isLoggedIn(req,res,next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+}
 
 
 module.exports = router;
