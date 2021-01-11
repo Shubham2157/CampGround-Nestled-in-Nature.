@@ -86,7 +86,13 @@ router.put("/:id", (req,res) =>{
 //Destroy campground route
 router.delete("/:id", (req,res) =>{
     //find And delete
-    res.send("you are trying to delete")
+    Campground.findByIdAndRemove(req.params.id, (err)=>{
+        if(err){
+            res.redirect("/campgrounds");
+        } else {
+            res.redirect("/campgrounds");
+        }
+    })
 })
 
 //middleware
