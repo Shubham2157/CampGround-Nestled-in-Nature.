@@ -83,6 +83,12 @@ router.put("/:id", (req,res) =>{
     })
 })
 
+//Destroy campground route
+router.delete("/:id", (req,res) =>{
+    //find And delete
+    res.send("you are trying to delete")
+})
+
 //middleware
 function isLoggedIn(req,res,next){
     if(req.isAuthenticated()){
