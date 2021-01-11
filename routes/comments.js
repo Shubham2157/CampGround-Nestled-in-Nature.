@@ -3,10 +3,7 @@ var router      = express.Router({mergeParams: true}); //merge parameter true fo
 var Campground  = require("../models/campground");
 var Comment     = require("../models/comment");
 
-//====================
-// Comments Routes
-//====================
-
+// comment form
 router.get("/new", isLoggedIn ,(req,res)=>{
     
     //find campground by id
@@ -20,6 +17,7 @@ router.get("/new", isLoggedIn ,(req,res)=>{
     })
 })
 
+// handle comment post
 router.post("/", isLoggedIn , (req,res)=>{
     //lookup campground using id
     Campground.findById(req.params.id, (err, campground)=>{
@@ -43,7 +41,7 @@ router.post("/", isLoggedIn , (req,res)=>{
         }
     })
 })
-
+//middleware
 function isLoggedIn(req,res,next){
     if(req.isAuthenticated()){
         return next();

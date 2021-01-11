@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
         }
     })
 })
-
+//post campground
 router.post("/", (req, res) => {
     // get data from user and add to campground array
     var name = req.body.name
@@ -31,7 +31,7 @@ router.post("/", (req, res) => {
         }
     }) 
 })
-
+//show campground form
 router.get("/new", (req, res) => {
     res.render("campgrounds/new")
 })

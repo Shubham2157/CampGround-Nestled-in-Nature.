@@ -9,7 +9,7 @@ const express       = require('express'),
       Comment       = require("./models/comment"),
       seedDB        = require("./seeds")
 
-
+// requiring routes
 var commentRoutes   = require("./routes/comments"),
     campgroundRoutes= require("./routes/campgrounds"),
     indexRoutes     = require("./routes/index")
@@ -17,20 +17,6 @@ var commentRoutes   = require("./routes/comments"),
 
 // connecting to the db with mongoose
 mongoose.connect("mongodb://localhost/yelp_camp" , { useNewUrlParser: true },  { useUnifiedTopology: true } )
-
-
-// Campground.create({
-//     name: "Shubham Jha",
-//     image: "https://pixabay.com/get/52e8d4444255ae14f1dc84609620367d1c3ed9e04e507748752e7ed1974bc2_340.jpg",
-//     description: "This is a huge granite hill, no bathrooms. No water. Beautiful granite!"
-// }, (err, campground) => {
-//     if(err){
-//         console.log(err)
-//     }else{
-//         console.log("NEWLY CREATED CAMPGROUND: ")
-//         console.log(campground)
-//     }
-// })
 
 app.use(bodyParser.urlencoded({ extended: true }));
 // setting view engine to ejs
@@ -64,10 +50,8 @@ app.use("/campgrounds/:id/comments",commentRoutes);
 
 
 
-
 // declaring Port no
 const port = 3000;
-
 // listing to the port
 app.listen(process.env.PORT || port, () => {
     console.log(`Serving to port ${port}`);
