@@ -61,7 +61,14 @@ router.get("/:id", (req,res) =>{
 
 //Edit campground route
 router.get("/:id/edit",(req,res) => {
-    res.send("Edit Campground Route")
+    Campground.findById(req.params.id, (err, foundCampground)=>{
+        if(err){
+            console.log(err);
+            res.redirect("/campgrounds")
+        } else{
+            res.render("campgrounds/edit",{campground: foundCampground})
+        }
+    })
 })
 //update campground route
 
