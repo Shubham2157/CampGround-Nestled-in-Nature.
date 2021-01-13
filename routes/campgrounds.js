@@ -60,32 +60,10 @@ router.get("/:id", (req, res) => {
 })
 
 //Edit campground route
-router.get("/:id/edit", (req, res) => {
-    //is user logged in
-    if (req.isAuthenticated()) {
-
-        Campground.findById(req.params.id, (err, foundCampground) => {
-            if (err) {
-                console.log(err);
-                res.redirect("/campgrounds")
-            } else {
-                //does user own the campground
-                // we cannot use if(foundCampground.author(mongoose object) === req.user._id(String))
-                if(foundCampground.author.id.equals(req.user._id)){
-                    res.render("campgrounds/edit", { campground: foundCampground })
-                } else {
-                    res.send("You do not have permission to do that");
-                }
-            }
-        })
-
-    } else {
-        console.log("You Need to log In ");
-        res.send("You Need to log In ");
-    }
-    //if not then redirect
-    //otgerwise,redirect
-
+router.get("/:id/edit", checkCampgroundOwnership, (req, res) => {
+    Campground.findById(req.params.id, (err, foundCampground) => {
+        res.render("campgrounds/edit", { campground: foundCampground })
+    })
 })
 
 //update campground route
@@ -119,6 +97,33 @@ function isLoggedIn(req, res, next) {
         return next();
     }
     res.redirect("/login");
+}
+
+function checkCampgroundOwnership(req, res, next) {
+    //is user logged in
+    if (req.isAuthenticated()) {
+
+        Campground.findById(req.params.id, (err, foundCampground) => {
+            if (err) {
+                console.log(err);
+                res.redirect("back")
+            } else {
+                //does user own the campground
+                // we cannot use if(foundCampground.author(mongoose object) === req.user._id(String))
+                if (foundCampground.author.id.equals(req.user._id)) {
+                    next();
+                } else {
+                    res.redirect("back");
+                }
+            }
+        })
+
+    } else {
+        res.redirect("back");
+    }
+    //if not then redirect
+    //otgerwise,redirect
+
 }
 
 
