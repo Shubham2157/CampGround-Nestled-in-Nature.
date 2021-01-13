@@ -5,16 +5,16 @@ var Campground = require("../models/campground")
 // Index - show all campgrounds
 router.get("/", (req, res) => {
     //Get all Campgrounds From DB
-    Campground.find({}, (err,allCampgrounds) =>{
-        if(err){
+    Campground.find({}, (err, allCampgrounds) => {
+        if (err) {
             console.log(err);
-        } else{
+        } else {
             res.render("campgrounds/index", { campgrounds: allCampgrounds, currentUser: req.user })
         }
     })
 })
 //post campground
-router.post("/", isLoggedIn ,(req, res) => {
+router.post("/", isLoggedIn, (req, res) => {
     // get data from user and add to campground array
     var name = req.body.name
     var image = req.body.image
@@ -28,31 +28,31 @@ router.post("/", isLoggedIn ,(req, res) => {
     // campgrounds.push(newCampground)
 
     Campground.create(newCampground, (err, newlyCreated) => {
-        if(err){
+        if (err) {
             console.log(err)
-        } else{
+        } else {
             console.log(newlyCreated);
             // redirect back to campground page
             res.redirect("/campgrounds")
         }
-    }) 
+    })
 })
 //show campground form
-router.get("/new", isLoggedIn ,(req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
     res.render("campgrounds/new")
 })
 
 //show all info in one page about one campground
-router.get("/:id", (req,res) =>{
+router.get("/:id", (req, res) => {
     //find campground with provided ID
-    Campground.findById(req.params.id).populate("comments").exec((err, foundCampground) =>{
-        if(err){
+    Campground.findById(req.params.id).populate("comments").exec((err, foundCampground) => {
+        if (err) {
             console.log(err);
-        } else{
+        } else {
             console.log(foundCampground);
-            
+
             //render show template with that campground
-            res.render("campgrounds/show", {campground: foundCampground})
+            res.render("campgrounds/show", { campground: foundCampground })
         }
     })
 
@@ -60,22 +60,34 @@ router.get("/:id", (req,res) =>{
 })
 
 //Edit campground route
-router.get("/:id/edit",(req,res) => {
-    Campground.findById(req.params.id, (err, foundCampground)=>{
-        if(err){
-            console.log(err);
-            res.redirect("/campgrounds")
-        } else{
-            res.render("campgrounds/edit",{campground: foundCampground})
-        }
-    })
+router.get("/:id/edit", (req, res) => {
+    //is user logged in
+    if (req.isAuthenticated()) {
+        Campground.findById(req.params.id, (err, foundCampground) => {
+            if (err) {
+                console.log(err);
+                res.redirect("/campgrounds")
+            } else {
+                res.render("campgrounds/edit", { campground: foundCampground })
+            }
+        })
+
+    } else {
+        console.log("You Need to log In ");
+        res.send("You Need to log In ");
+    }
+    //if not then redirect
+    //does user own th campground
+    //otgerwise,redirect
+
 })
+
 //update campground route
 
-router.put("/:id", (req,res) =>{
+router.put("/:id", (req, res) => {
     //find And update
-    Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err, updatedCampground)=>{
-        if(err){
+    Campground.findByIdAndUpdate(req.params.id, req.body.campground, (err, updatedCampground) => {
+        if (err) {
             res.redirect("/campgrounds")
         } else {
             res.redirect("/campgrounds/" + req.params.id);
@@ -84,10 +96,10 @@ router.put("/:id", (req,res) =>{
 })
 
 //Destroy campground route
-router.delete("/:id", (req,res) =>{
+router.delete("/:id", (req, res) => {
     //find And delete
-    Campground.findByIdAndRemove(req.params.id, (err)=>{
-        if(err){
+    Campground.findByIdAndRemove(req.params.id, (err) => {
+        if (err) {
             res.redirect("/campgrounds");
         } else {
             res.redirect("/campgrounds");
@@ -96,8 +108,8 @@ router.delete("/:id", (req,res) =>{
 })
 
 //middleware
-function isLoggedIn(req,res,next){
-    if(req.isAuthenticated()){
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
         return next();
     }
     res.redirect("/login");
