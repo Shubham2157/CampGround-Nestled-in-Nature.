@@ -63,12 +63,19 @@ router.get("/:id", (req, res) => {
 router.get("/:id/edit", (req, res) => {
     //is user logged in
     if (req.isAuthenticated()) {
+
         Campground.findById(req.params.id, (err, foundCampground) => {
             if (err) {
                 console.log(err);
                 res.redirect("/campgrounds")
             } else {
-                res.render("campgrounds/edit", { campground: foundCampground })
+                //does user own the campground
+                // we cannot use if(foundCampground.author(mongoose object) === req.user._id(String))
+                if(foundCampground.author.id.equals(req.user._id)){
+                    res.render("campgrounds/edit", { campground: foundCampground })
+                } else {
+                    res.send("You do not have permission to do that");
+                }
             }
         })
 
@@ -77,7 +84,6 @@ router.get("/:id/edit", (req, res) => {
         res.send("You Need to log In ");
     }
     //if not then redirect
-    //does user own th campground
     //otgerwise,redirect
 
 })
