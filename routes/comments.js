@@ -48,7 +48,7 @@ router.post("/", isLoggedIn , (req,res)=>{
 })
 
 // comment edit route
-router.get("/:comment_id/edit", (req,res) => {
+router.get("/:comment_id/edit", checkCommentOwnership ,(req,res) => {
     Comment.findById(req.params.comment_id, (err, foundComment)=>{
         if(err){
             res.render("back");
@@ -90,5 +90,34 @@ function isLoggedIn(req,res,next){
     }
     res.redirect("/login");
 }
+
+function checkCommentOwnership(req, res, next) {
+    //is user logged in
+    if (req.isAuthenticated()) {
+
+        Comment.findById(req.params.id, (err, foundComment) => {
+            if (err) {
+                console.log(err);
+                res.redirect("back")
+            } else {
+                //does user own the comment
+                // we cannot use if(foundComment.author(mongoose object) === req.user._id(String))
+                if (foundComment.author.id.equals(req.user._id)) {
+                    next();
+                } else {
+                    res.redirect("back");
+                }
+            }
+        })
+
+    } else {
+        res.redirect("back");
+    }
+    //if not then redirect
+    //otgerwise,redirect
+
+}
+
+
 
 module.exports = router;
