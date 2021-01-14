@@ -72,7 +72,15 @@ router.put("/:comment_id", (req, res)=>{
 
 /// comment destroy route
 router.delete("/:comment_id", (req,res)=>{
-    res.send("deleted")
+    // res.send("deleted")
+    //findById and remove
+    Comment.findByIdAndRemove(req.params.comment_id, (err) =>{
+        if(err){
+            res.redirect("back");
+        } else{
+            res.redirect("/campgrounds/" + req.params.id)
+        }
+    })
 })
 
 //middleware
