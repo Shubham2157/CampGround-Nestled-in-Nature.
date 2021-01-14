@@ -48,7 +48,7 @@ router.post("/", isLoggedIn , (req,res)=>{
 })
 
 router.get("/:comment_id/edit", (req,res) => {
-    res.render("comments/edit");
+    res.render("comments/edit", {campground_id: req.params.id});
 })
 
 //middleware
