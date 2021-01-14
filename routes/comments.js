@@ -47,6 +47,7 @@ router.post("/", isLoggedIn , (req,res)=>{
     })
 })
 
+// comment edit route
 router.get("/:comment_id/edit", (req,res) => {
     Comment.findById(req.params.comment_id, (err, foundComment)=>{
         if(err){
@@ -55,6 +56,11 @@ router.get("/:comment_id/edit", (req,res) => {
             res.render("comments/edit", {campground_id: req.params.id, comment: foundComment});
         }
     })
+})
+
+// comment update
+router.put("/:comment_id", (req, res)=>{
+    res.send("comment updated")
 })
 
 //middleware
