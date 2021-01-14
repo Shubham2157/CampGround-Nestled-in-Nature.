@@ -59,7 +59,7 @@ router.get("/:comment_id/edit", checkCommentOwnership ,(req,res) => {
 })
 
 // comment update
-router.put("/:comment_id", (req, res)=>{
+router.put("/:comment_id", checkCommentOwnership,(req, res)=>{
     Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, (err, updatedComment) =>{
         if(err){
             res.redirect("back");
@@ -71,7 +71,7 @@ router.put("/:comment_id", (req, res)=>{
 })
 
 /// comment destroy route
-router.delete("/:comment_id", (req,res)=>{
+router.delete("/:comment_id", checkCommentOwnership,(req,res)=>{
     // res.send("deleted")
     //findById and remove
     Comment.findByIdAndRemove(req.params.comment_id, (err) =>{
