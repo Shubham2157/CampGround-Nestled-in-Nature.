@@ -70,6 +70,11 @@ router.put("/:comment_id", (req, res)=>{
     })
 })
 
+/// comment destroy route
+router.delete("/:comment_id", (req,res)=>{
+    res.send("deleted")
+})
+
 //middleware
 function isLoggedIn(req,res,next){
     if(req.isAuthenticated()){
