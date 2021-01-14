@@ -60,7 +60,14 @@ router.get("/:comment_id/edit", (req,res) => {
 
 // comment update
 router.put("/:comment_id", (req, res)=>{
-    res.send("comment updated")
+    Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, (err, updatedComment) =>{
+        if(err){
+            res.redirect("back");
+        }
+        else{
+            res.redirect("/campgrounds/" + req.params.id)
+        }
+    })
 })
 
 //middleware
