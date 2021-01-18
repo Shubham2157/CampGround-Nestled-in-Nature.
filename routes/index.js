@@ -44,6 +44,7 @@ router.post("/login", passport.authenticate("local", {
     failureRedirect: "/login"
 }), (req, res) => {
     // res.send("longin sucess...")
+    req.flash("success", "Welcome back " + res.username)
 })
 
 //log out route
